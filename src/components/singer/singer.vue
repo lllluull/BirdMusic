@@ -3,3 +3,6 @@
     asdasdasdasd
   </div>
 </template>
+<script>
+
+</script>

@@ -25,4 +25,5 @@
         .itemlink
           border-bottom 2px solid red
           color #FF69B4
+          font-size $font-size-large-x
 </style>

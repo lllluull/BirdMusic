@@ -3,7 +3,6 @@
     <mheader></mheader>
     <mtab></mtab>
     <router-view></router-view>
-
   </div>
 </template>
 
@@ -16,7 +15,6 @@ export default {
     mheader,
     mtab
   }
-
 }
 </script>
 
