@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
 import './common/styl/index.styl'
+import './common/css/iconfont.css'
 fastclick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({

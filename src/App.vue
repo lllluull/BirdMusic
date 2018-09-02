@@ -2,7 +2,10 @@
   <div id="app">
     <mheader></mheader>
     <mtab></mtab>
+    <keep-alive>
     <router-view></router-view>
+    </keep-alive>
+
   </div>
 </template>
 
@@ -17,7 +20,5 @@ export default {
   }
 }
 </script>
-
-<style>
-
+<style lang="stylus" scoped>
 </style>
