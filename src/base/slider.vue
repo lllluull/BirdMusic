@@ -114,6 +114,9 @@ export default {
 .slider
   min-height 1px
   position relative
+  overflow hidden
+  height 0
+  padding-bottom 3.312rem
   .slider-group
     white-space nowrap
     position relative

@@ -12,8 +12,11 @@
           </div>
           <div class="title">{{item.title}}</div>
         </div>
+        <loading v-show='!randomlist.length'></loading>
       </div>
+
     </div>
+
     <div class='hotsongbottom'>
      <div class='changelist' @click = 'changlist'><span class='iconfont'>&#xe628;</span>换一批</div>
     </div>
@@ -22,6 +25,7 @@
 <script>
 import {getList} from '@/api/recommend.js'
 import randomArry from '@/common/js/randomarry.js'
+import loading from '@/base/loading/loading'
 export default {
   data () {
     return {
@@ -41,6 +45,9 @@ export default {
       randomArry(this.hotlist, this.randomlist, 6)
     }
   },
+  components: {
+    loading
+  },
   mounted () {
     this._getlist()
   }
@@ -58,17 +65,22 @@ export default {
   background-color $color-text-ll
 .hotsongcontent
   width 100%
-  padding-bottom 133.34
   overflow:hidden
   background-color $color-text-ll
+  height 0
+  padding-bottom 7.2rem
   .singlecontent
     position relative
     width 31%
     float left
     display: inline-block;
     margin 1%
+    height 0
+    padding-bottom 3.2rem
     .img
       position relative
+      height 0
+      padding-bottom 2.56rem
       img
         width 100%
         border-radius .1rem
