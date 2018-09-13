@@ -5,6 +5,7 @@
       </div>
       <div class='title'>BirdMusic</div>
     </div>
+    <router-link to="/sreach" tag='div' class="sreach iconfont">&#xe620;</router-link>
   </div>
 </template>
 <script>
@@ -30,4 +31,10 @@
     width .8rem
     background-size .8rem .8rem
     margin-top .2rem
+  .sreach
+    position absolute
+    right .3rem
+    top .3rem
+    font-size 30px
+    font-weight bold
 </style>

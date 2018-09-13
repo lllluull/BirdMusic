@@ -5,7 +5,7 @@
         热门歌单推荐
       </div>
       <div class="hotsongcontent">
-        <div class="singlecontent"  v-for = '(item, index) in randomlist' :key = index>
+        <div class="singlecontent"  v-for = '(item, index) in randomlist' :key = index   @click='todetail(item.content_id)'>
           <div class="img">
             <img :src="item.cover" alt="">
           <div class='listen_num'><span class='iconfont'>&#xe6a0;</span>{{item.listen_num}}</div>
@@ -16,7 +16,7 @@
       </div>
 
     </div>
-
+    <router-view></router-view>
     <div class='hotsongbottom'>
      <div class='changelist' @click = 'changlist'><span class='iconfont'>&#xe628;</span>换一批</div>
     </div>
@@ -43,6 +43,13 @@ export default {
     changlist () {
       this.randomlist = []
       randomArry(this.hotlist, this.randomlist, 6)
+    },
+    todetail (id) {
+      this.$router.push({name: `listdetail`,
+        params: {
+          id: id,
+          code: id
+        }})
     }
   },
   components: {
