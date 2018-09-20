@@ -25,7 +25,7 @@ export function getsong (id) {
     platform: 'yqq',
     needNewCode: 0,
     begin: 0,
-    num: 30,
+    num: 50,
     songstatus: 1,
     notice: 0,
     singermid: id

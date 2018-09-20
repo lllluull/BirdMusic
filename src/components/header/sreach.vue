@@ -1,47 +1,73 @@
 <template>
+<transition name='sreach'>
   <div class="sreach">
-    <input type="text" placeholder="请输入歌曲、专辑、歌手、歌单名字" v-model='input'><button @click='_getsreach'>sad</button>
-    <ul>
-    </ul>
+    <searchbox ref='searchbox' @query = 'queryChange'></searchbox>
+    <div class="hotsreach" >
+      <div class='hottitle'>热门搜索</div>
+      <span v-for='(item, index) in hotkey' :key = index @click="intoquery(item.k)">{{item.k}}</span>
+    </div>
+    <suggest :query = 'query' :zhida = 'zhida'></suggest>
   </div>
+</transition>
+
 </template>
 <script>
-import {getsreach} from '@/api/sreachapi.js'
+import searchbox from '@/base/sreachbox.vue'
+import suggest from '@/components/header/suggest.vue'
+import {gethotkey} from '@/api/hotkey.js'
 export default {
   data () {
     return {
-      input: '',
-      showdata: {},
-      album: []
+      hotkey: [],
+      query: '',
+      zhida: true
     }
   },
+  components: {
+    searchbox,
+    suggest
+  },
   methods: {
-    _getsreach () {
-      return getsreach(this.input).then((res) => {
-        return Promise.resolve(res)
+    _gethotkey () {
+      gethotkey().then(res => {
+        this.hotkey = res.data.hotkey.splice(0, 15)
       })
+    },
+    intoquery (value) {
+      this.$refs.searchbox.setquery(value)
+    },
+    queryChange (newQuery) {
+      this.query = newQuery
     }
   },
   created () {
-    this.$watch('input', (newinput) => {
-      this._getsreach.then((res) => {
-        this.showdata = res.data
-      })
-    })
+    this._gethotkey()
   }
 }
-
 </script>
 <style lang="stylus" scoped>
+@import '~common/styl/variable'
+  .sreach-enter-active, .sreach-leave-active
+    transition: all 0.3s ease
+  .sreach-enter, .sreach-leave-to
+    transform: translate3d(-100%, 0, 0)
   .sreach
     position fixed
     top 0
     left 0
     right 0
     bottom 0
-    background-color white
-    input
-      border 1px solid grey
-      width 80%
-      height .6rem
+    background-color  $color-background
+  .hotsreach
+    .hottitle
+      color white
+      padding-left .2rem
+      margin-top .2rem
+    span
+      color $color-dialog-background
+      display inline-block
+      margin .1rem .1rem
+      padding  .2rem .2rem
+      background-color #33CCFF
+      border-radius .3rem
 </style>
