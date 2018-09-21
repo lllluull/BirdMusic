@@ -49,7 +49,6 @@ export default {
           this.ranklist = res.data.data.topList
           this.$nextTick(() => {
             this.scroll = new BScroll(this.$refs.rank)
-            console.log(this.scroll)
           })
         })
     },

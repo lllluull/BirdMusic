@@ -47,9 +47,12 @@ export default {
     getdetail () {
       getsong(this.id).then((res) => {
         this.msg = res.data
-        this.msg.list.forEach((item) => {
-          this.songlist.push(createSong(item.musicData))
-        })
+        if (this.msg) {
+          this.songlist = []
+          this.msg.list.forEach((item) => {
+            this.songlist.push(createSong(item.musicData))
+          })
+        }
         this.$nextTick(() => {
           this.scroll = new BScroll(this.$refs.songlist, {
             probeType: 3
@@ -108,6 +111,13 @@ export default {
       this.$refs.detailheader.style['backdrop-filter'] = `blur(${blur}px)`
       this.$refs.detailheader.style['webkitBackdrop-filter'] = `blur(${blur}px)`
     }
+  },
+  activated () {
+    this.id = this.$route.params.code
+    this.url = this.$route.params.url
+    this.getdetail()
+    this.$refs.detailheader.style = `background-image: url(${this.url})`
+    window.addEventListener('scroll', this.handleScroll, true)
   },
   mounted () {
     this.id = this.$route.params.code

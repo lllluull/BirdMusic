@@ -2,11 +2,11 @@
 <transition name='sreach'>
   <div class="sreach">
     <searchbox ref='searchbox' @query = 'queryChange'></searchbox>
-    <div class="hotsreach" >
+    <div class="hotsreach" v-show = '!query'>
       <div class='hottitle'>热门搜索</div>
       <span v-for='(item, index) in hotkey' :key = index @click="intoquery(item.k)">{{item.k}}</span>
     </div>
-    <suggest :query = 'query' :zhida = 'zhida'></suggest>
+    <suggest :query = 'query'  v-show='query'></suggest>
   </div>
 </transition>
 
@@ -30,7 +30,7 @@ export default {
   methods: {
     _gethotkey () {
       gethotkey().then(res => {
-        this.hotkey = res.data.hotkey.splice(0, 15)
+        this.hotkey = res.data.hotkey.slice(0, 15)
       })
     },
     intoquery (value) {

@@ -11,8 +11,7 @@ export function gethotkey () {
     outCharset: 'utf-8',
     notice: 0,
     platform: 'yqq',
-    needNewCode: 0,
-    jsonpCallback: '__jp0'
+    needNewCode: 0
   }
-  return jsonp1(url, data, 'callback')
+  return jsonp1(url, data, {param: 'jsonpCallback'})
 }

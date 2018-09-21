@@ -141,7 +141,6 @@ export default {
   },
   mounted () {
     this._getsingerlist()
-    console.log(this)
   }
 }
 </script>

@@ -25,6 +25,19 @@ export function createSong (musicData) {
     url: `http://ws.stream.qqmusic.qq.com/C100${musicData.songmid}.m4a?fromtag=0&guid=126548448`
   })
 }
+export function createSongsec (item) {
+  return new Song({
+    id: item.id,
+    mid: item.mid,
+    singer: allsinger(item.singer),
+    name: item.title,
+    album: item.album.name,
+    duration: item.interval,
+    duration1: filterduration(item.interval),
+    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${item.album.mid}.jpg?max_age=2592000`,
+    url: `http://ws.stream.qqmusic.qq.com/C100${item.mid}.m4a?fromtag=0&guid=126548448`
+  })
+}
 
 function allsinger (singerlist) {
   let ret = ''
