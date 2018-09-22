@@ -24,6 +24,7 @@ export default {
   methods: {
     back () {
       this.$router.back()
+      this.query = ''
     },
     clearsreach () {
       this.query = ''

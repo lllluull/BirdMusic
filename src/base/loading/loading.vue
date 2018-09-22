@@ -1,7 +1,9 @@
 <template>
   <div class="loading">
-    <img width="150" height="24" src="./loading.gif">
-    <p class="desc">{{title}}</p>
+    <div class='innerloading'>
+      <img width="50" height="50" src="./loading.gif">
+      <p class="desc">{{title}}</p>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -19,9 +21,15 @@ export default {
 
   .loading
     width: 100%
-    text-align: center
-    .desc
-      line-height: 20px
-      font-size: $font-size-small
-      color: $color-text-l
+    display flex
+    height 4rem
+    align-items center
+    justify-content center
+    .innerloading
+      text-align center
+      .desc
+        line-height: .6rem
+        height .6rem
+        font-size: $font-size-medium-x
+        color: $color-theme
 </style>

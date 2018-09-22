@@ -17,17 +17,19 @@
             <div class='songablum'>{{item.album}}</div>
           </div>
         </li>
-        <div v-show='dropDown === 0' class='loading'><span class='iconfont pullup'>&#xe602;</span> 上拉加载更多</div>
+        <div v-show='dropDown === 0 && result.length !== 0' class='loading'><span class='iconfont pullup'>&#xe602;</span> 上拉加载更多</div>
         <div v-show='dropDown === 1' class='loading'><span class='iconfont letgo'>&#xe602;</span>放手开始加载</div>
         <div v-show='dropDown === 2' class='loading'>加载中</div>
       </ul>
     </div>
+    <loading v-show='result.length === 0' :title="title"></loading>
   </div>
 </template>
 <script>
 import {getsreach} from '@/api/sreach.js'
 import {createSongsec} from '@/common/js/song.js'
 import BScroll from 'better-scroll'
+import loading from '@/base/loading/loading'
 export default {
   props: {
     query: {
@@ -41,8 +43,12 @@ export default {
       result: [],
       dropDown: 0,
       zhida: true,
-      history: []
+      history: [],
+      title: '正在搜索...'
     }
+  },
+  components: {
+    loading
   },
   methods: {
     _getsreach (page, zhida) {
@@ -92,6 +98,9 @@ export default {
           code: id,
           url: url
         }})
+    },
+    gethistory () {
+      this.history = JSON.parse(localStorage.history)
     }
   },
   computed: {
@@ -124,11 +133,14 @@ export default {
   watch: {
     query (newquery) {
       this.result = []
+      clearTimeout(this.timer)
+      this.timer = null
       this.timer = setTimeout(() => {
-        clearTimeout(this.timer)
         this._getsreach(newquery, this.page)
-        this.history.push(newquery)
-      }, 1000)
+        if (newquery && !this.history.includes(newquery)) {
+          this.history.push(newquery)
+        }
+      }, 600)
     },
     dropDown () {
       if (this.dropDown === 2) {
@@ -136,10 +148,15 @@ export default {
         this.zhida = false
         this._getsreach(this.page, this.zhida)
       }
+    },
+    history (newvalue) {
+      console.log(newvalue)
+      localStorage.history = JSON.stringify(newvalue)
     }
   },
   mounted () {
     this._getsreach()
+    this.gethistory()
   }
 }
 </script>
